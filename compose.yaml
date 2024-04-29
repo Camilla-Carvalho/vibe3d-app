@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: ./frontend/
+      dockerfile: Containerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - public_network
+  middleware:
+    build:
+      context: ./middleware/
+      dockerfile: Containerfile
+    ports:
+      - "8081:8081"
+    networks:
+      - public_network
+      - private_network
+  backend:
+    image: "postgres/postgresql:15.6"
+    container_name: "database"
+    environment:
+      POSTGRESQL_DATABASE: vibe3d
+      POSTGRESQL_USER: vibe3dUser
+      POSTGRESQL_PASSWORD: vibe3dPass
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./backend/database_scripts:/opt/app-root/src/postgresql-start:Z
+      - ./backend/database_data:/var/lib/pgsql/data
+    networks:
+      - private_network
+volumes:
+    networks:
+      public_network:
+        driver: bridge
+      private_network:
+        driver: bridge

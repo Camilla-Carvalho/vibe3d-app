@@ -1,0 +1,10 @@
+# NodeJs Dependency directories
+**/node_modules/
+**/jspm_packages/
+**.bak
+**/build/Release
+**/web_modules/
+
+# Java & IntelliJ
+**/.idea
+**/target

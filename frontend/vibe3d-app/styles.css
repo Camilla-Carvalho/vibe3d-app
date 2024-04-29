@@ -1,0 +1,14 @@
+/* Estilos comuns */
+
+/* Transição para a opacidade e posição das seções */
+section {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+/* Seção atual */
+section.current {
+    opacity: 1;
+    transform: translateX(0);
+}

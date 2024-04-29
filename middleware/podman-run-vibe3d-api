@@ -1,0 +1,2 @@
+# Run Vibe3d-Api
+podman run -it -d -p 8081:8081 --network vibe3d-network --name vibe3d-api localhost/vibe3d-api

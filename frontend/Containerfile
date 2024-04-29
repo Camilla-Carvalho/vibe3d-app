@@ -1,0 +1,10 @@
+# Use a imagem base do OpenJDK 17 (Alpine Linux)
+FROM docker.io/library/nginx:1.25.5-alpine-slim
+
+# Definir autor
+LABEL authors="Camilla Carvalho"
+
+# Copiar o JAR da aplicação para o diretório /app no container
+COPY  vibe3d-app /usr/share/nginx/html
+
+EXPOSE 80

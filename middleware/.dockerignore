@@ -1,0 +1,8 @@
+*
+!vibe3d-api/target/*-runner
+!vibe3d-api/target/*.jar
+!vibe3d-api/target/lib/*
+!vibe3d-api/target/quarkus-app/*
+
+####
+vibe3d-api/.idea

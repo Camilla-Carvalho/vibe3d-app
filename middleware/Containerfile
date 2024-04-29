@@ -1,0 +1,25 @@
+# Use a imagem base do OpenJDK 17 (Alpine Linux)
+FROM khipu/openjdk17-alpine AS builder
+
+# Definir autor
+LABEL authors="Camilla Carvalho"
+
+# Definir a variável de ambiente JAVA_HOME
+ENV JAVA_HOME /opt/java/openjdk
+
+# Copiar o JAR da aplicação para o diretório /app no container
+#COPY ./vibe3d-api/target/vibe3dapi*.jar /app/application.jar
+
+COPY vibe3d-api/target/quarkus-app/ /deployments/
+
+EXPOSE 8081
+
+USER 1819
+
+ENV JAVA_OPTS_APPEND="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
+ENV JAVA_APP_JAR="/deployments/quarkus-run.jar"
+
+#ENTRYPOINT [ "/opt/jboss/container/java/run/run-java.sh" ]
+
+# Definir as opções cli (command line interface) para o Java
+CMD ["java", "-jar", "/deployments/quarkus-run.jar"]

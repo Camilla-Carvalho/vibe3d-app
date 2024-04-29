@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Impressão 3D</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        /* Estilos comuns */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #444;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        main {
+            padding: 20px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .product {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+        .product-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .product-price {
+            font-size: 28px;
+            color: green;
+            float: right;
+            margin-top: -5px;
+        }
+		.product-price-inner{
+			font-size: 35px;
+            color: green;
+            float: right;
+            margin-top: -5px;
+		}
+        .button {
+            background-color: #1e557b;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+		.button-disabled {
+            background-color: #6e6f79;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+		.button-back{
+			background-color: #444444;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+		}
+
+        /* Estilos específicos */
+        .checkout-form {
+            max-width: 100%;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+        }
+        .checkout-form input[type="text"],
+        .checkout-form input[type="email"],
+        .checkout-form input[type="password"],
+        .checkout-form input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .checkout-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .checkout-form button {
+            width: 100%;
+            padding: 15px 0;
+        }
+		img{
+			width: 100%;
+			border: 1px solid #636363;
+            border-radius: 5px;
+            box-sizing: border-box;
+		}
+	
+
+		/* Transição para a opacidade e posição das seções */
+		section {
+			opacity: 0;
+			transform: translateX(100%);
+			transition: opacity 2s ease-out, transform 2s ease-out;
+		}
+
+		/* Seção atual */
+		section.current {
+			opacity: 1;
+			transform: translateX(0);
+			transition: opacity 2s ease-out, transform 2s ease-out;
+		}
+        .hidden-line{
+            /* Adiciona espaço acima e abaixo do hr */
+            border: none;
+            height: 1px;
+            background-color: white;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Loja da Impressão 3D</h1>
+    </header>
+    <nav>
+        <a href="#products-list">Produtos</a>
+		<!--a href="#product-details">Detalhes</a-->
+        <a href="#cart">Ver Carrinho</a>
+        <a href="#login">Login</a>
+        <a href="#cadastro">CadÚnico</a>
+    </nav>
+    <main>
+        <!-- Página de produtos -->
+        <section id="products-list" style="display: block;" class="current">
+            <!--h2>Produtos</h2>
+            <div class="product">
+                <img src="product1.jpg" alt="Produto 1">
+                <div class="product-title">Produto 1</div>
+                <div class="product-price">$10</div>
+                <button class="btn btn-outline-primary">Adicionar ao Carrinho</button>
+            </div-->
+        </section>
+
+        <!-- Página de detalhes do produto -->
+        <section id="product-details" style="display: none;">
+            <!--h2>Detalhes do Produto</h2>
+            <div class="product-detailed">
+                <img src="product1.jpg" alt="Produto 1">
+                <div class="product-title">Produto 1</div>
+                <div class="product-price">$10</div>
+				<p>Descrição do produto aqui...</p>
+                <a href="#products-list" class="btn btn-outline-primary">Adicionar ao Carrinho</a>
+            </div>
+			<button onclick="showPage('products-list');" class="btn btn-outline-primary">Voltar para Produtos</button>
+			<p/-->
+        </section>
+
+        <!-- Página do carrinho de compras -->
+        <section id="cart" style="display: none;">
+            <h2>Carrinho de Compras</h2>
+            <div id="cart-items" class="product">
+				<p>Itens no carrinho de compras:<p>
+                <!-- Itens do carrinho serão adicionados aqui -->
+            </div>
+            <div class="col-12">
+                <button onclick="showPage('products-list')" class="btn btn-outline-primary">Continuar Comprando</button>
+                <hr class="hidden-line"/>
+                <button onclick="finalizarCompra()" class="btn btn-outline-primary">Finalizar Compra</button>
+                <hr class="hidden-line"/>
+                <div id="alert-carrinho-vazio" class="alert alert-warning fade" role="alert">
+                    O carrinho de compras está vazio! Para finalizar sua compra, adicione itens ao carrinho de compras.
+                </div>
+            </div>
+        </section>
+
+        <!-- Página de Login -->
+        <section id="login" style="display: none;">
+            <h2>Iniciar usuário</h2>
+            <div class="checkout-form">
+                <input id="login-email" type="email" placeholder="E-mail" required>
+                <input id="login-passwd" type="password" placeholder="senha" required>
+                <p>
+                    <button id="login-btt" onclick="loginUsuario()" class="btn btn-outline-primary">Iniciar (sessão)</button>
+                </p>
+                <hr class="hidden-line"/>
+                <h4>Ainda não tenho usuário..</h4>
+                <p>Para cadastrar um novo usuário, clique no botão abaixo!</p>
+                <p>
+                    <button id="login-goto" onclick="gotoCadastrar()" class="btn btn-outline-primary">Cadastrar usuário</button>
+                </p>
+            </div>
+        </section>
+
+        <!-- Página de Cadastro -->
+        <section id="cadastro" style="display: none;">
+            <h2>Cadastrar meu usuário</h2>
+            <div class="checkout-form">
+                <input type="text" placeholder="Nome" required>
+                <input type="text" placeholder="Sobrenome" required>
+                <input type="email" placeholder="E-mail" required>
+                <input type="password" placeholder="Senha" required>
+                <textarea placeholder="Endereço" required></textarea>
+                <p>
+                    <button onclick="cadastrarUsuario()" class="btn btn-outline-primary">Cadastrar</button>
+                </p>
+            </div>
+        </section>
+
+        <!-- Página de finalização da compra -->
+        <section id="checkout" style="display: none;">
+            <h2>Finalização da Compra</h2>
+            <div class="checkout-form">
+                <input type="text" placeholder="Nome" required>
+                <input type="email" placeholder="E-mail" required>
+                <input type="tel" placeholder="Telefone" required>
+                <button onclick="finalizarCompra()" class="btn btn-outline-primary">Finalizar Pedido</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        &copy; 2024 Loja de Impressão 3D
+    </footer>
+    <script>
+		listaProdutos = [];
+		itensCarrinho = "";
+		showItensCarrinho = document.getElementById('cart-items');
+		const sections = document.querySelectorAll('section');
+
+        function getElemento(id){
+            return document.getElementById(id);
+        }
+
+		function gotoCadastrar(){
+            showPage("cadastro");
+		}
+
+        function loginUsuario(){
+            console.info("login: "+getElemento("login-email").value+", "+getElemento("login-passwd").value);
+        }
+
+        function showPage(id) {
+			sections.forEach(section => {
+				if (section.id === id) {
+					section.style.display = 'block';
+					section.classList.add('current');
+					console.info(section.id);
+				} else {
+					section.style.display = 'none';
+					section.classList.remove('current');
+				}
+			});
+		}
+		
+		function addProduto2Carrinho(id,nome,imagem,button){
+            console.log(id+","+nome+","+imagem+","+button);
+			if(!itensCarrinho.includes(id)){
+				itensCarrinho += ","+id;
+                let btnLista = document.getElementById("lista-id-"+id);
+                desabilitarButton(button);
+                desabilitarButton(btnLista);
+				console.info("Add item:"+itensCarrinho+" no carrinho");
+				showItensCarrinho.innerHTML += "<p id='carrinho-p-"+id+"'><img src='images/"+imagem+"' style='width: 30px;'/> "+(nome.length>=30?nome.substring(0,30)+"...":nome)+" <img src='images/icone-delete.jpg' style='width: 30px;float:right;' onclick='removerProdutoLista("+id+");'/></p>";
+			}
+			else {
+				button.innerHTML="Item no carrinho";
+				console.info("Item já existe no carrinho");
+			}
+		}
+
+        function removerProdutoLista(id,button){
+            if(itensCarrinho.includes(id)){
+                this.itensCarrinho = itensCarrinho.replace(","+id, "");
+                removerParagrafo(id);
+                let btnLista = document.getElementById("lista-id-"+id);
+                habilitarButton(btnLista);
+                console.info("Remover Item:"+itensCarrinho+" do carrinho");
+            }
+            else {
+                str="Item não está no carrinho";
+                button.innerHTML=str;
+                console.info(str);
+            }
+        }
+
+        function desabilitarButton(button){
+            button.setAttribute("disabled",true);
+            button.setAttribute("class","button-disabled");
+            button.innerHTML="Item no carrinho";
+        }
+        function habilitarButton(button){
+            button.removeAttribute("disabled");
+            button.setAttribute("class", "btn btn-outline-primary");
+            button.innerHTML="Adicionar ao carrinho";
+        }
+
+        /**
+         * 1. Obter o elemento do parágrafo
+         * 2. Remover o parágrafo
+         * @param id
+         */
+        function removerParagrafo(id) {
+            let paragrafo = document.getElementById('carrinho-p-'+id);
+            paragrafo.remove();
+        }
+		
+		function finalizarCompra(){
+			if(itensCarrinho===""){
+				alert("O carrinho está vazio!");
+			}
+			else{
+				alert(itensCarrinho);
+			}
+		}
+		
+        document.addEventListener('DOMContentLoaded', function() {
+			
+            const productList = document.getElementById('products-list');
+			
+			const links = document.querySelectorAll('nav a');
+			const linksProduct = document.querySelectorAll('main section div a');
+			const buttons = document.querySelectorAll('button');
+
+            // Função para carregar a lista de produtos
+            function loadProducts() {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://localhost:8081/produtos', true);
+                xhr.onload = function() {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        const products = JSON.parse(xhr.responseText);
+						listaProdutos = products;
+                        renderProducts(products);
+                    } else {
+                        console.error('Erro ao carregar os produtos:', xhr.statusText);
+						
+                    }
+                };
+                xhr.onerror = function() {
+                    console.error('Erro de rede ao carregar produtos');
+					const productDiv = document.createElement('div');
+						productDiv.classList.add('product');
+						productDiv.innerHTML = `<p>Erro ao carregar a API dos produtos...</p><p><img src="images/icone-api-fail.jpg"><p>`;
+						productList.appendChild(productDiv);
+                };
+                xhr.send();
+            }
+
+            // Função para carregar a lista de produtos
+            function loadCarrinho() {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://localhost:8081/produtos', true);
+                xhr.onload = function() {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        const products = JSON.parse(xhr.responseText);
+                        listaProdutos = products;
+                        renderProducts(products);
+                    } else {
+                        console.error('Erro ao carregar os produtos:', xhr.statusText);
+
+                    }
+                };
+                xhr.onerror = function() {
+                    console.error('Erro de rede ao carregar produtos');
+                };
+                xhr.send();
+            }
+
+            links.forEach(link => {
+				//alert(link);
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const target = this.getAttribute('href').replace('#', '');
+					showPage(target);
+                });
+            });
+			
+            // Função para renderizar os produtos na página
+            function renderProducts(products) {
+                productList.innerHTML = "<h2>Produtos</h2>";
+                products.forEach(product => {
+                    const productDiv = document.createElement('div');
+                    productDiv.classList.add('product');
+					//t = "a"+${product.id};
+					//productDiv.setAttribute("id", t);
+                    productDiv.innerHTML = `
+                        <img onclick="renderProduct(${product.id});" src="images/${product.imagens}" alt="${product.nome}">
+                        <div class="product-title">${product.nome}</div>
+                        <div class="row">
+                            <div class="col"><button id="product_id_${product.id}" onclick='renderProduct(${product.id});' class="btn btn-outline-primary">Detalhes...</button></div>
+                            <div class="col product-price">R$${product.preco}</div>
+						</div>
+						<hr class="hidden-line"/>
+						<div class="clearfix row align-items-end"><div class="col ">
+                            <button id="lista-id-${product.id}" onclick="addProduto2Carrinho('${product.id}','${product.nome}','${product.imagens}',this)" class="btn btn-outline-primary">Adicionar ao carrinho</button>
+                        </div></div>`;
+					productList.appendChild(productDiv);
+                });
+            }
+            // Carregar os produtos quando a página carregar
+            loadProducts();
+        });
+		
+		productDetailDiv = document.getElementById('product-details');
+		
+		// Função para renderizar o detalhe do produto
+            function renderProduct(product) {
+				//alert(product);
+				listaProdutos.forEach(prod => {
+					if(prod.id === product){
+						productDetailDiv.classList.add('productDetail');
+						//alert(prod.id+" >> "+productDetailDiv);
+						//t = "a"+${product.id};
+						//productDetailDiv.setAttribute("id", t);
+						productDetailDiv.innerHTML = `
+                            <h2>${prod.nome}</h2>
+							<img src="images/${prod.imagens}" alt="${prod.nome}">
+							<hr class="hidden-line"/>
+							<div class="container">
+							    <div class="product-price-inner">R$${prod.preco}</div>
+							`;
+						if(itensCarrinho.includes(product)){
+							productDetailDiv.innerHTML += `
+								<button id="carrinho-btn-${prod.id}" class="btn btn-outline-primary" disabled="disabled">Item no carrinho</button>
+							`;
+						}else{
+							productDetailDiv.innerHTML += `
+								<button id="carrinho-btn-${prod.id}" onclick="addProduto2Carrinho('${prod.id}','${prod.nome}','${prod.imagens}',this)"
+								        class="btn btn-outline-primary">Adicionar ao carrinho</button>
+							`;
+						}
+						productDetailDiv.innerHTML += `
+								</div>
+								<hr class="hidden-line"/>
+								<div class="product-title">${prod.descricao}</div>
+								<p>
+									<button onclick="showPage('products-list');" class="button-back">Voltar para Produtos</button>
+								</p>
+							`;
+						showPage("product-details");
+					}
+                });
+            }
+    </script>
+</body>
+</html>
