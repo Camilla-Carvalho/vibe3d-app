@@ -49,6 +49,17 @@
             <artifactId>quarkus-arc</artifactId>
         </dependency>
 
+        <!-- Consumir serviços -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-rest-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-config-yaml</artifactId>
+        </dependency>
+
         <!-- Panache dependency -->
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -60,7 +71,6 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-jdbc-postgresql</artifactId>
         </dependency>
-
 
         <!-- Docs OpenAPI e Swagger -->
         <dependency>

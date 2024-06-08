@@ -4,7 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.*;
 
 @ApplicationScoped
-public class Main {
+public class HomePageResource {
 
     //@Inject
     //HomePageRepository homePageRepository;
