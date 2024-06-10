@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vibe3d-api
+spec:
+  selector:
+    matchLabels:
+      app: vibe3d-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vibe3d-api
+    spec:
+      containers:
+      - name: vibe3d-api
+        image: vibe3d-api:latest
+        env:
+        - name: QUARKUS_DATASOURCE_JDBC_URL
+          value: jdbc:postgresql://postgresql:5432/vibe3d
+        - name: QUARKUS_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: postgresql-secret
+              key: POSTGRES_USER
+        - name: QUARKUS_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgresql-secret
+              key: POSTGRES_PASSWORD
+        ports:
+        - containerPort: 8081
